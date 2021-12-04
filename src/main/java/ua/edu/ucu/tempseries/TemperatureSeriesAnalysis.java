@@ -153,25 +153,25 @@ public class TemperatureSeriesAnalysis {
         return new TempSummaryStatistics(av, dev, min, max);
     }
 
-//    public double addTemps(double... temps) {
-//        int j = 0;
-//        for (int i = 0; i < temperatures.length; i++) {
-//            if (temperatures[i] == null) {
-//                 temperatures[i] = temps[j];
-//                 j += 1;
-//            }
-//        }
-//        if (j < temps.length) {
-//            double[] newTemperatures = new double[temperatures.length * 2];
-//            System.arraycopy(temperatures, 0, newTemperatures, 0, temperatures.length);
-//            temperatures = newTemperatures;
-//        }
-//        double sum = 0;
-//        for (int i = 0; i < temperatures.length; i++) {
-//            if (temperatures[i] != null) {
-//                sum += temperatures[i];
-//            }
-//        }
-//        return sum;
-//    }
+    public double addTemps(double... temps) {
+        int j = 0;
+        for (int i = 0; i < temperatures.length; i++) {
+            if (temperatures[i] == 0.0) {
+                 temperatures[i] = temps[j];
+                 j += 1;
+            }
+        }
+        if (j < temps.length) {
+            double[] newTemperatures = new double[temperatures.length * 2];
+            System.arraycopy(temperatures, 0, newTemperatures, 0, temperatures.length);
+            temperatures = newTemperatures;
+        }
+        double sum = 0;
+        for (int i = 0; i < temperatures.length; i++) {
+            if (temperatures[i] != 0.0) {
+                sum += temperatures[i];
+            }
+        }
+        return sum;
+    }
 }

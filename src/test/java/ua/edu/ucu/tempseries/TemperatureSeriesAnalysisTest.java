@@ -20,7 +20,7 @@ public class TemperatureSeriesAnalysisTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAverageWithEmptyArray() throws IllegalArgumentException{
+    public void testAverageWithEmptyArray() throws IllegalArgumentException {
         double[] temperatureSeries = {};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
@@ -36,7 +36,75 @@ public class TemperatureSeriesAnalysisTest {
 
         double actualResult = seriesAnalysis.average();
         System.out.println(actualResult);
-        
-        assertEquals(expResult, actualResult, 0.00001);        
+
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testMinForOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.min();
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testMaxForOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.max();
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testTheClosestToZeroForOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testTheClosestToValueForOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -1.0;
+
+        // call tested method
+        double actualResult = seriesAnalysis.findTempClosestToValue(152663.1);
+
+        // compare expected result with actual result
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+
+    @Test
+    public void testLessThanValueForOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] expResult = {-1.0};
+        double[] expResult1 = new double[1];
+
+        // call tested method
+        double[] actualResult = seriesAnalysis.findTempsLessThen(12);
+        double[] actualResult2 = seriesAnalysis.findTempsLessThen(-2.0);
+
+        // compare expected result with actual result
+        assertTrue(expResult1.length == actualResult.length);
+        assertTrue(expResult.length == actualResult.length);
     }
 }

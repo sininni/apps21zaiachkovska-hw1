@@ -55,6 +55,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
+        if (temperatures == null || temperatures.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double min = temperatures[0];
         for (int i = 0; i < temperatures.length; i++) {
             if (temperatures[i] < min) {
@@ -65,6 +68,9 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double max() {
+        if (temperatures == null || temperatures.length == 0) {
+            throw new IllegalArgumentException();
+        }
         double max = temperatures[0];
         for (int i = 0; i < temperatures.length; i++) {
             if (temperatures[i] > max) {

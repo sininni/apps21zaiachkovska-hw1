@@ -20,7 +20,7 @@ public class TemperatureSeriesAnalysisTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testAverageWithEmptyArray() {
+    public void testAverageWithEmptyArray() throws IllegalArgumentException{
         double[] temperatureSeries = {};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
@@ -35,9 +35,8 @@ public class TemperatureSeriesAnalysisTest {
         double expResult = 1.0;
 
         double actualResult = seriesAnalysis.average();
+        System.out.println(actualResult);
         
         assertEquals(expResult, actualResult, 0.00001);        
     }
-    
-
 }

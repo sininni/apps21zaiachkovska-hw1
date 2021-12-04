@@ -26,7 +26,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double average() {
-        if (temperatures.length == 0) {
+        if (temperatures == null || temperatures.length == 0) {
             throw new IllegalArgumentException();
         } else {
             double sum = 0;
@@ -41,7 +41,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double deviation() {
-        if (temperatures.length == 0) {
+        if (temperatures == null || temperatures.length == 0) {
             throw new IllegalArgumentException();
         } else {
             double differenceSum = 0;
@@ -79,7 +79,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        if (temperatures.length == 0) {
+        if (temperatures == null || temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
         double closestDoudle = temperatures[0];
@@ -94,8 +94,10 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsLessThen(double tempValue) {
-        double[] lessTemperatures = new double[temperatures.length];
+        if (temperatures == null || temperatures.length == 0) {
+            throw new IllegalArgumentException();}
 
+        double[] lessTemperatures = new double[temperatures.length];
         int j = 0;
 
         for (int i = 0; i < temperatures.length; i++) {
@@ -109,6 +111,8 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
+        if (temperatures == null || temperatures.length == 0) {
+            throw new IllegalArgumentException();}
         double[] biggerTemperatures = new double[temperatures.length];
 
         int j = 0;
@@ -133,7 +137,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        if (temperatures.length == 0) {
+        if (temperatures == null || temperatures.length == 0) {
             throw new IllegalArgumentException();
         }
         double av = this.average();

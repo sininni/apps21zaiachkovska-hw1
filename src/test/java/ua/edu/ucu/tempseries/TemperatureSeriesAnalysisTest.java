@@ -59,10 +59,8 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.min();
     }
-
-
 
     @Test
     public void testMaxForOneElementArray() {
@@ -83,7 +81,7 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.max();
     }
 
     @Test
@@ -105,7 +103,7 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.findTempClosestToZero();
     }
 
     @Test
@@ -127,7 +125,7 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.findTempClosestToValue(1.0);
     }
 
     @Test
@@ -152,7 +150,7 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.findTempsLessThen(12);
     }
 
     @Test
@@ -178,6 +176,6 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         // expect exception here
-        seriesAnalysis.average();
+        seriesAnalysis.findTempsGreaterThen(2);
     }
 }

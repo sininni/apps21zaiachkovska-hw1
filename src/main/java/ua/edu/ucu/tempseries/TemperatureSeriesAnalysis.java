@@ -1,9 +1,7 @@
 package ua.edu.ucu.tempseries;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 
 public class TemperatureSeriesAnalysis {
     double[] temperatures;

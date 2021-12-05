@@ -8,6 +8,7 @@ import java.util.List;
 public class TemperatureSeriesAnalysis {
     double[] temperatures;
     double mean;
+    int sizeCounter;
 
     public TemperatureSeriesAnalysis() {
          temperatures = new double[0];
@@ -22,6 +23,8 @@ public class TemperatureSeriesAnalysis {
                 checkTemps[i] = temperatureSeries[i];
             }
         temperatures = checkTemps;
+        sizeCounter = temperatures.length;
+        mean = this.average();
         }
     }
 
@@ -101,7 +104,8 @@ public class TemperatureSeriesAnalysis {
 
     public double[] findTempsLessThen(double tempValue) {
         if (temperatures == null || temperatures.length == 0) {
-            throw new IllegalArgumentException();}
+            throw new IllegalArgumentException();
+        }
 
         double[] lessTemperatures = new double[temperatures.length];
         int j = 0;
@@ -112,13 +116,16 @@ public class TemperatureSeriesAnalysis {
                 j += 1;
             }
         }
-//        lessTemperatures = Arrays.copyOfRange(lessTemperatures, 0, j);
+        if (lessTemperatures.length > 0) {
+            lessTemperatures = Arrays.copyOfRange(lessTemperatures, 0, j);
+        }
         return lessTemperatures;
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
         if (temperatures == null || temperatures.length == 0) {
-            throw new IllegalArgumentException();}
+            throw new IllegalArgumentException();
+        }
         double[] biggerTemperatures = new double[temperatures.length];
 
         int j = 0;
@@ -129,18 +136,12 @@ public class TemperatureSeriesAnalysis {
                 j += 1;
             }
         }
-//        biggerTemperatures = Arrays.copyOfRange(biggerTemperatures, 0, j);
+        if (biggerTemperatures.length > 0) {
+            biggerTemperatures = Arrays.copyOfRange(biggerTemperatures, 0, j);
+        }
         return biggerTemperatures;
     }
 
-    class TempSummaryStatistics {
-        public TempSummaryStatistics(double avTem, double dev, double min, double max) {
-            final double avgTemp = avTem;
-            final double devTemp = dev;
-            final double minTemp = min;
-            final double maxTemp = max;
-        }
-    }
 
     public TempSummaryStatistics summaryStatistics() {
         if (temperatures == null || temperatures.length == 0) {
@@ -154,24 +155,35 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double addTemps(double... temps) {
+        if (temperatures == null || temperatures.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
         int j = 0;
-        for (int i = 0; i < temperatures.length; i++) {
-            if (temperatures[i] == 0.0) {
-                 temperatures[i] = temps[j];
-                 j += 1;
-            }
-        }
-        if (j < temps.length) {
-            double[] newTemperatures = new double[temperatures.length * 2];
-            System.arraycopy(temperatures, 0, newTemperatures, 0, temperatures.length);
-            temperatures = newTemperatures;
-        }
         double sum = 0;
-        for (int i = 0; i < temperatures.length; i++) {
-            if (temperatures[i] != 0.0) {
+        if (sizeCounter + temps.length <= temperatures.length) {
+            for (int i = sizeCounter; i < sizeCounter + temps.length; i++) {
+                temperatures[i] = temps[j];
+                j += 1;
+            }
+
+            for (int i = 0; i < temperatures.length; i++) {
                 sum += temperatures[i];
             }
+        } else {
+            double[] newTemps = new double[temperatures.length * 2];
+            for (int i = 0; i < sizeCounter; i++) {
+                newTemps[i] = temperatures[i];
+                sum += newTemps[i];
+            }
+            for (int k = 0; k < temps.length; k++) {
+                newTemps[sizeCounter + k] = temps[k];
+                sum += temps[k];
+            }
+            temperatures = newTemps;
         }
+
+        sizeCounter += temps.length;
         return sum;
     }
 }
